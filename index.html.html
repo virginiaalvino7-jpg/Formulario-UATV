@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seguimiento Estudiantil</title>
+<link rel="stylesheet" href="formulario.css">
+</head>
+
+<body>
+<section id="loginScreen" class="login-screen">
+    <div class="login-card">
+        <div class="login-logo">
+            <img src="logoUTIM.png" alt="Logotipo UTIM">
+        </div>
+        <h1>Seguimiento Estudiantil</h1>
+        <p class="login-description">Ingresa al sistema para continuar</p>
+
+        <form id="loginForm">
+            <label>Matrícula
+                <input type="text" id="matricula" placeholder="Ingresa tu matrícula">
+            </label>
+            <label>Contraseña
+                <input type="password" id="password" placeholder="Ingresa tu contraseña">
+            </label>
+            <button type="submit" class="login-button">Iniciar sesión</button>
+        </form>
+
+        <p class="login-footer">Sistema de registro y acompañamiento de estudiantes</p>
+    </div>
+</section>
+
+<div class="layout" id="appLayout" style="display:none">
+    <aside>
+        <div class="logo">
+            <img src="logoUTIM.png" alt="Logotipo UTIM">
+            <strong>UATV</strong>
+            <small>Sistema estudiantil</small>
+        </div>
+        <nav>
+            <button class="nav active" data-view="inicio">⌂ Inicio</button>
+            <button class="nav" data-view="entrevista">＋ Registrar alumno</button>
+            <button class="nav" data-view="alumnos">♙ Alumnos registrados</button>
+            <button class="nav" data-view="riesgo">◇ Riesgo</button>
+        </nav>
+    </aside>
+
+    <main>
+        <header>
+            <div>
+                <h1 id="pageTitle">Panel de seguimiento</h1>
+                <p>Registro y acompañamiento de estudiantes</p>
+            </div>
+            <div class="header-actions">
+                <span id="today"></span>
+                <button class="btn" id="logoutBtn">Cerrar sesión</button>
+            </div>
+        </header>
+
+        <section id="inicio" class="view active">
+            <div class="welcome">
+                <h2>Bienvenido al seguimiento estudiantil</h2>
+                <p>Registra estudiantes y consulta de forma sencilla su situación académica.</p>
+                <button class="btn" data-go="entrevista">＋ Registrar alumno</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span>Alumnos registrados</span>
+                    <strong id="total">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Entrevistas realizadas</span>
+                    <strong id="interviews">0</strong>
+                </div>
+                <div class="stat">
+                    <span>Casos de riesgo alto</span>
+                    <strong id="high">0</strong>
+                </div>
+            </div>
+
+            <div class="panel">
+                <h3>Últimos alumnos registrados</h3>
+                <div id="recent" class="empty">Todavía no hay registros.</div>
+            </div>
+        </section>
+
+        <section class="view" id="entrevista">
+            <div class="section-heading">
+                <span class="eyebrow">FORMULARIO DE CAPTURA</span>
+                <h2>Entrevista inicial</h2>
+                <p>Registra la información del estudiante.</p>
+            </div>
+
+            <form id="studentForm">
+                <input type="hidden" name="id">
+
+                <div class="form-section">
+                    <div class="form-title"><span>01</span><div><h3>Datos generales</h3><p>Identificación del estudiante.</p></div></div>
+                    <div class="fields">
+                        <label>Nombre completo<input name="nombre" placeholder="Nombre y apellidos"></label>
+                        <label>Matrícula<input name="matricula" placeholder="Número de control"></label>
+                        <label>Fecha de entrevista<input name="fecha" type="date"></label>
+                        <label>Edad<input name="edad" type="number"></label>
+                        <label>Teléfono<input name="telefono" type="tel"></label>
+                        <label>Correo electrónico<input name="correo" type="text"></label>
+                        <label>Plantel<input name="plantel"></label>
+                        <label>Programa educativo
+                            <select name="carrera">
+                                <option value="">Selecciona un programa</option>
+                                <option>Licenciatura en Educación</option>
+                                <option>Licenciatura en Contaduría</option>
+                                <option>Licenciatura en Ingeniería</option>
+                            </select>
+                        </label>
+                        <label>Semestre
+                            <select name="semestre">
+                                <option value="">Selecciona el semestre</option>
+                                <option>1.º semestre</option><option>2.º semestre</option>
+                                <option>3.º semestre</option><option>4.º semestre</option>
+                                <option>5.º semestre</option><option>6.º semestre</option>
+                                <option>7.º semestre</option><option>8.º semestre</option>
+                                <option>9.º semestre</option><option>10.º semestre</option>
+                            </select>
+                        </label>
+                        <label>Grupo
+                            <select name="grupo">
+                                <option value="">Selecciona un grupo</option>
+                                <option>A</option><option>B</option><option>C</option>
+                            </select>
+                        </label>
+                        <label>Persona entrevistadora<input name="entrevistador"></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-title"><span>02</span><div><h3>Situación socioeconómica</h3><p>Contexto familiar y económico.</p></div></div>
+                    <div class="fields">
+                        <label>¿Con quién vive?
+                            <select name="convivencia">
+                                <option value="">Seleccionar</option><option>Madre y padre</option>
+                                <option>Madre</option><option>Padre</option><option>Familiares</option>
+                                <option>Pareja e hijos</option><option>Solo/a</option><option>Otra situación</option>
+                            </select>
+                        </label>
+                        <label>Situación laboral
+                            <select name="trabajo">
+                                <option value="">Seleccionar</option><option>No trabaja</option>
+                                <option>Medio tiempo</option><option>Tiempo completo</option>
+                                <option>Trabajo eventual</option>
+                            </select>
+                        </label>
+                        <label>Apoyo económico principal
+                            <select name="apoyo">
+                                <option value="">Seleccionar</option><option>Familia</option>
+                                <option>Trabajo propio</option><option>Beca</option>
+                                <option>Apoyo gubernamental</option><option>Otro</option>
+                            </select>
+                        </label>
+                        <label class="full">Dificultades económicas o de transporte<textarea name="economia" rows="3"></textarea></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-title"><span>03</span><div><h3>Aspectos personales y familiares</h3><p>Redes de apoyo y fortalezas.</p></div></div>
+                    <div class="fields">
+                        <label>Red de apoyo
+                            <select name="redApoyo">
+                                <option value="">Seleccionar</option><option>Fuerte</option>
+                                <option>Moderada</option><option>Limitada</option><option>No identificada</option>
+                            </select>
+                        </label>
+                        <label>Situación familiar
+                            <select name="situacionFamiliar">
+                                <option value="">Seleccionar</option><option>Estable</option>
+                                <option>Cambios recientes</option><option>Conflictos familiares</option>
+                                <option>Otra</option><option>Prefiere no responder</option>
+                            </select>
+                        </label>
+                        <label class="full">Descripción personal o familiar<textarea name="personal" rows="3"></textarea></label>
+                        <label class="full">Intereses, fortalezas y apoyos identificados<textarea name="fortalezas" rows="3"></textarea></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-title"><span>04</span><div><h3>Situación académica</h3><p>Desempeño y continuidad escolar.</p></div></div>
+                    <div class="fields">
+                        <label>Promedio<input name="promedio" type="number"></label>
+                        <label>Asistencia
+                            <select name="asistencia">
+                                <option value="">Seleccionar</option><option>Regular</option>
+                                <option>Faltas ocasionales</option><option>Faltas frecuentes</option>
+                                <option>Riesgo de abandono</option>
+                            </select>
+                        </label>
+                        <label>Materias en riesgo<input name="materias"></label>
+                        <label>Situación académica
+                            <select name="academica">
+                                <option value="">Seleccionar</option><option>Sin dificultades relevantes</option>
+                                <option>Dificultades de aprendizaje</option><option>Bajo rendimiento</option>
+                                <option>Rezago académico</option><option>Riesgo de abandono</option>
+                            </select>
+                        </label>
+                        <label class="full">Dificultades para continuar estudiando<textarea name="dificultades" rows="3"></textarea></label>
+                        <label class="full">Apoyos académicos que requiere<textarea name="apoyoAcademico" rows="3"></textarea></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-title"><span>05</span><div><h3>Evaluación de vulnerabilidad</h3><p>Clasificación para el seguimiento.</p></div></div>
+                    <div class="fields">
+                        <label>Nivel de riesgo
+                            <select name="riesgo">
+                                <option value="Bajo">Bajo</option><option value="Medio">Medio</option><option value="Alto">Alto</option>
+                            </select>
+                        </label>
+                        <label>Prioridad de atención
+                            <select name="prioridad">
+                                <option value="">Seleccionar</option><option>Rutina</option>
+                                <option>Próxima semana</option><option>Lo antes posible</option>
+                                <option>Atención inmediata</option>
+                            </select>
+                        </label>
+                        <fieldset class="full">
+                            <legend>Factores identificados</legend>
+                            <div class="check-grid">
+                                <label><input type="checkbox" name="factores" value="Dificultad económica"> Dificultad económica</label>
+                                <label><input type="checkbox" name="factores" value="Inasistencia"> Inasistencia</label>
+                                <label><input type="checkbox" name="factores" value="Bajo rendimiento"> Bajo rendimiento</label>
+                                <label><input type="checkbox" name="factores" value="Responsabilidades familiares"> Responsabilidades familiares</label>
+                                <label><input type="checkbox" name="factores" value="Falta de apoyo"> Falta de apoyo</label>
+                                <label><input type="checkbox" name="factores" value="Riesgo de abandono"> Riesgo de abandono</label>
+                                <label><input type="checkbox" name="factores" value="Otro factor"> Otro factor</label>
+                            </div>
+                        </fieldset>
+                        <label class="full">Acciones y acuerdos de seguimiento<textarea name="seguimiento" rows="3"></textarea></label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-title"><span>06</span><div><h3>Observaciones y cierre</h3><p>Acuerdos y próximos pasos.</p></div></div>
+                    <div class="fields">
+                        <label class="full">Observaciones de la persona entrevistadora<textarea name="observaciones" rows="4"></textarea></label>
+                        <label>Próxima fecha de seguimiento<input name="proximaFecha" type="date"></label>
+                        <label>Estado del caso
+                            <select name="estado">
+                                <option>Abierto</option><option>En seguimiento</option>
+                                <option>Canalizado</option><option>Cerrado</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn outline" id="clearButton">Limpiar</button>
+                    <button type="submit" class="btn">Guardar entrevista</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="view" id="alumnos">
+            <div class="panel">
+                <h2>Alumnos registrados</h2>
+                <p class="muted">Busca y consulta los registros guardados.</p>
+                <div class="toolbar">
+                    <input id="search" placeholder="Buscar por nombre o matrícula">
+                    <select id="filter">
+                        <option value="">Todos los riesgos</option>
+                        <option>Bajo</option><option>Medio</option><option>Alto</option>
+                    </select>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Nombre</th><th>Matrícula</th><th>Carrera</th><th>Fecha</th><th>Riesgo</th><th>Acción</th></tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <p id="count" class="muted" style="margin-top:12px">0 registros</p>
+            </div>
+        </section>
+
+        <section class="view" id="riesgo">
+            <div class="panel">
+                <h2>Evaluación de riesgo</h2>
+                <p class="muted">Consulta los alumnos que requieren atención.</p>
+                <div id="riskList" class="empty">No hay casos registrados.</div>
+            </div>
+        </section>
+    </main>
+
+</div>
+<script src="formulario.js"></script>
+</body>
+</html>
