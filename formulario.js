@@ -1,4 +1,21 @@
 
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAdvO6FHpb1ZVdqPJ7Pz1DybzHinfJmajQ",
+  authDomain: "mibasededatos-b5366.firebaseapp.com",
+  projectId: "mibasededatos-b5366",
+  storageBucket: "mibasededatos-b5366.firebasestorage.app",
+  messagingSenderId: "799541022178",
+  appId: "1:799541022178:web:8b0d826ff904579fd87dbb"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+console.log("Firebase conectado correctamente");
+
         const loginScreen = document.getElementById("loginScreen");
         const appLayout = document.getElementById("appLayout");
         const studentForm = document.getElementById("studentForm");
